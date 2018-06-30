@@ -64,6 +64,7 @@ group :development do
   gem "guard"
   gem "guard-rspec"
   gem "guard-cucumber"
+  gem 'pry-rails'
 end
 
 
