@@ -8,7 +8,22 @@ RSpec.feature 'Listing Articles' do
     @article2 = Article.create(title: 'The second article', body: 'Lorem Ipsum Dolor Sot', user: @john)
   end
 
-  scenario 'A user lists all articles' do
+  scenario 'A user lists all articles, user signed-in' do
+    # Coming from Capybara -- conditions
+    visit '/'
+    login_as(@john)
+
+    # Coming from Capybara -- expectations
+    expect(page).to have_content(@article1.title)
+    expect(page).to have_content(@article1.body)
+    expect(page).to have_content(@article2.title)
+    expect(page).to have_content(@article2.body)
+    expect(page).to have_link(@article1.title)
+    expect(page).to have_link(@article2.title)
+    expect(page).to have_link('New Article')
+  end
+
+  scenario 'A user lists all articles user, not signed in' do
     # Coming from Capybara -- conditions
     visit '/'
 
@@ -19,5 +34,6 @@ RSpec.feature 'Listing Articles' do
     expect(page).to have_content(@article2.body)
     expect(page).to have_link(@article1.title)
     expect(page).to have_link(@article2.title)
+    expect(page).not_to have_link('New article')
   end
 end
