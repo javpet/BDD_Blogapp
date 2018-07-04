@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.feature 'Show an Article' do
   # Defining scenario
   before do
-    @article = Article.create(title: 'The fourth article', body: 'Lorem Ipsumissimio')
+    @john = User.create!(email: 'john@example.com', password: 'password')
+    login_as(@john) # https://github.com/plataformatec/devise/wiki/How-To:-Test-with-Capybara
+    @article = Article.create(title: 'The fourth article', body: 'Lorem Ipsumissimio', user: @john)
   end
 
   scenario 'A user shows a new article' do

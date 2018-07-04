@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.feature 'Deleting Articles' do
   before do
-    @article = Article.create(title: 'hohoohooo', body: 'also hohohohoho')
+    @john = User.create!(email: 'john@example.com', password: 'password')
+    login_as(@john) # https://github.com/plataformatec/devise/wiki/How-To:-Test-with-Capybara
+    @article = Article.create(title: 'hohoohooo', body: 'also hohohohoho', user: @john)
   end
 
   # Defining scenario

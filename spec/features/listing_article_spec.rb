@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.feature 'Listing Articles' do
   # Defining scenario
   before do
-    @article1 = Article.create(title: 'The first article', body: 'Lorem Ipsum Dolor Sit')
-    @article2 = Article.create(title: 'The second article', body: 'Lorem Ipsum Dolor Sot')
+    @john = User.create!(email: 'john@example.com', password: 'password')
+    @article1 = Article.create(title: 'The first article', body: 'Lorem Ipsum Dolor Sit', user: @john)
+    @article2 = Article.create(title: 'The second article', body: 'Lorem Ipsum Dolor Sot', user: @john)
   end
 
   scenario 'A user lists all articles' do
